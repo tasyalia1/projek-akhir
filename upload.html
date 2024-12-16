@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Start Detect</title>
+   <style>
+      img, video {
+         max-width: 100%; /* Batas ukuran maksimum */
+         height: auto;    /* Menjaga proporsi asli */
+         display: block;
+         margin: 0 auto; /* Tengahkan */
+      }
+   </style>
+</head>
+<body>
+   <h1>Sistem Deteksi Helm</h1>
+   <form action="/" method="post" enctype="multipart/form-data">
+      <p>Upload Gambar</p>
+      <input type="file" name="img" accept=".jpg,.png,.jpeg">
+      <button type="submit" name="action" value="image">Mulai Deteksi</button>
+
+      <p>Upload Video</p>
+      <input type="file" name="video" accept=".mp4,.mov">
+      <button type="submit" name="action" value="video">Mulai Deteksi</button>
+
+      {% if predicted_image %}
+      <h3>Hasil Deteksi Gambar:</h3>
+      <img src={{ url_for('static', filename="deteksi.jpg") }} alt="Hasil Deteksi">
+      {% endif %}
+
+      {% if predicted_video %}
+      <h3>Hasil Deteksi Video:</h3>
+      <video controls>
+         <source src={{ url_for('static', filename="deteksi.mp4") }} type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+      {% endif %}
+
+      {% if video_stream %}
+      <h3>Video Deteksi:</h3>
+      <img src="/video_feed" alt="Video Streaming">
+      {% endif %}
+
+   </form>
+</body>
+</html>
